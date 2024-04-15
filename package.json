@@ -1,0 +1,55 @@
+{
+  "name": "@hat/xkt-viewer",
+  "version": "1.0.0",
+  "description": "XKT viewer",
+  "main": "dist/xeokit-bim-viewer.min.es.js",
+  "author": "HieuQD hieuquach0813@gmail.com",
+  "files": [
+    "/dist/xeokit-bim-viewer.min.es.js",
+    "/dist/xeokit-bim-viewer.es.js",
+    "/dist/xeokit-bim-viewer.css",
+    "/dist/messages.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup --config rollup.config.js; rollup --config rollup.dev.config.js;  cp locales/messages.js ./dist/.",
+    "docs": "esdoc",
+    "publish": "npm publish --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuachDucHieu/XktViewer.git"
+  },
+  "keywords": [
+    "OpenProject",
+    "webgl",
+    "javascript",
+    "xeokit",
+    "xeolabs",
+    "ifc",
+    "bim",
+    "buildingsmart",
+    "openbim",
+    "opensource",
+    "3d-viewer"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.2.1",
+    "autoprefixer": "^9.8.6",
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0",
+    "puppeteer": "^10.1.0",
+    "rollup": "^2.70.2",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "dependencies": {
+    "@xeokit/xeokit-sdk": "2.4.2-beta-49",
+    "http-server": "^13.0.2",
+    "my-package": "^0.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/QuachDucHieu/XktViewer/issues"
+  },
+  "homepage": "https://github.com/QuachDucHieu/XktViewer#readme",
+  "license": "ISC"
+}
