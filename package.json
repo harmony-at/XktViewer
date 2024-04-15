@@ -1,5 +1,5 @@
 {
-  "name": "@hat/xkt-viewer",
+  "name": "@harmony-at/xkt-viewer",
   "version": "1.0.0",
   "description": "XKT viewer",
   "main": "dist/xeokit-bim-viewer.min.es.js",
