@@ -5,6 +5,10 @@ const messages = {
   // English
 
   en: {
+    busyModal: {
+      // The dialog that appears in the center of the canvas while we are loading a model
+      loading: "Please wait for the model to load", // Loading <myModel>
+    },
     NavCube: {
       // The 3D navigation cube at the bottom right of the canvas
       front: "Front",
