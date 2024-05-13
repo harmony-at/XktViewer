@@ -110490,59 +110490,15 @@ class ModelsExplorer extends Controller {
       this._xktLoader.objectDefaults = objectColors;
   }
 
-  loadProject(urlJson, mainLink, metaLink, name, done, error) {
+  loadProject(urlJson, done, error) {
     this.unloadProject();
     this._modelsInfo = {};
     this._numModels = 0;
 
-    if(mainLink && metaLink) {
-      const projectInfo = 
-        {
-          id: "Nova",
-          name: "Nova",
-          models: [
-            {
-              id: "NovaModel",
-              name: name
-            }
-          ]
-        };
-      this._parseProject(
-          {
-            id: "Nova",
-            name: "Nova",
-            models: [
-              {
-                id: "NovaModel",
-                name: name
-              }
-            ]
-          }
-        , done);
-      this._projects = 
-        {
-          id: "Nova",
-          name: "Nova",
-          models: [
-            {
-              id: "NovaModel",
-              name: name
-            }
-          ]
-        };
-      this.loadModel2(projectInfo, mainLink, metaLink, done, error)
-    } else {
-      fetch(urlJson)
-        .then(response => response.json())
-        .then(data => {
-          this._projects = data;
-          this._parseProject(data, done);
-          this._loadAllModels(data, done);
-      })
-      .catch(error => {
-        console.error('Lỗi khi lấy dữ liệu JSON:', error);
-      });
-    }
+    
+    this._projects = urlJson;
+    this._parseProject(urlJson, done);
+    this._loadAllModels(urlJson, done);
 
     // this._parseProject(projectInfo, url, urlMeta, done);
     // this.server.getProject(
@@ -110692,7 +110648,7 @@ class ModelsExplorer extends Controller {
     //   return;
     // }
     const models = projectInfo.models[0];
-    this._loadNextModel(projectInfo, models.mainLink, models.metaLink, done);
+    this._loadNextModel(projectInfo, models.mainLink, models.metadataLink, done);
   }
 
   _loadNextModel(projectInfo, url, urlMeta, done) {
@@ -110828,7 +110784,7 @@ class ModelsExplorer extends Controller {
       `${this.viewer.localeService.translate('busyModal.loading')}`
     );
       this.server.getMetadata(
-        modelView.metaLink,
+        modelView.metadataLink,
         (json) => {
           this._loadGeometry(modelId, modelView.mainLink, modelView, json, done, error);
         },
@@ -114413,16 +114369,13 @@ class BIMViewer extends Controller {
    * @param {Function} done Callback invoked on success.
    * @param {Function} error Callback invoked on failure, into which the error message string is passed.
    */
-  loadProject(urlJson, mainLink, metaLink, name, done, error) {
+  loadProject(urlJson, done, error) {
     // if (!projectId) {
     //   this.error('loadProject() - Argument expected: objectId');
     //   return;
     // }
     this._modelsExplorer.loadProject(
       urlJson,
-      mainLink,
-      metaLink,
-      name,
       () => {
         if (done) {
           done();
